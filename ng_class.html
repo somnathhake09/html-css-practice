@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>ngclass</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    </head>
+        <style>
+            .sky{
+                color:white;
+                background-color:lightblue;
+                padding:20px;
+                font-family:"courier new";
+                }  
+                .tomato{
+                    color:white;
+                    background-color:tomato;
+                    padding:20px;
+                    font-family:"courier new";
+                }      
+        </style>
+        <body ng-app="">
+            <p>choose a class:</p>
+            <select ng-model="home">
+                <option value="sky">sky</option>
+                <option value="tomato">tomato</option>
+            </select>
+            <div ng-class="home">
+            Hellow Guys
+        </div>
+    </body>
+</html>
