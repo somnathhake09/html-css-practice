@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Online Voting System</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6fc;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .captcha-box {
+      margin-top: 15px;
+      text-align: center;
+    }
+    .captcha-img {
+      font-size: 24px;
+      font-weight: bold;
+      background: #eaf1ff;
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 6px;
+      letter-spacing: 3px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #357abd;
+    }
+    .switch {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <form onsubmit="return validateForm()">
+      <label>Registered Email ID *</label>
+      <input type="email" id="email" placeholder="Enter registered Email ID" required>
+
+      <div class="captcha-box">
+        <div id="captcha" class="captcha-img"></div>
+        <button type="button" onclick="generateCaptcha()">↻ Refresh</button>
+      </div>
+
+      <label>Captcha *</label>
+      <input type="text" id="captchaInput" placeholder="Enter Captcha" required>
+
+      <button type="submit">Request OTP</button>
+    </form>
+    <div class="switch">Indian Resident Elector | Indian Overseas Elector</div>
+  </div>
+
+  <script>
+    let captchaCode = "";
+    function generateCaptcha() {
+      let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      captchaCode = "";
+      for (let i = 0; i < 6; i++) {
+        captchaCode += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      document.getElementById("captcha").innerText = captchaCode;
+    }
+
+    function validateForm() {
+      let input = document.getElementById("captchaInput").value;
+      if (input !== captchaCode) {
+        alert("Invalid Captcha. Try again!");
+        generateCaptcha();
+        return false;
+      }
+      alert("OTP sent to registered email (Demo)");
+      return true;
+    }
+
+    // load captcha when page opens
+    window.onload = generateCaptcha;
+  </script>
+</body>
+</html>
